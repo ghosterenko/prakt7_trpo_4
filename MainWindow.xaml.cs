@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Konkov_prakt7.Winds;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +28,7 @@ namespace Konkov_prakt7
         {
             try
             {
-                AllEmploes = await api.GetEmployesAsync( );
+                AllEmploes = await api.GetEmployesAsync();
                 ListEmployes.ItemsSource = employes;
                 ApplyFilters( );
             }
@@ -49,6 +50,55 @@ namespace Konkov_prakt7
                     employes.Add(item);
                 }
             }
+        }
+
+        private void DeleteBtn_Click (object sender, RoutedEventArgs e)
+        {
+            if(ListEmployes.SelectedValue == null)
+            {
+                MessageBox.Show("Объект не выбран");
+            } 
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Вы точно хотите удалить выбранную запись?", "Удаление", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    return;
+                }
+            }
+            
+        }
+
+        private void AddBtn_Click (object sender, RoutedEventArgs e)
+        {
+            var window = new AddWindow(null);
+            window.Owner = this;
+            window.ShowDialog( );
+        }
+
+        private void EditBtn_Click (object sender, RoutedEventArgs e)
+        {
+            if (ListEmployes.SelectedValue == null)
+            {
+                MessageBox.Show("Объект не выбран");
+            }
+            else
+            {
+                var window = new AddWindow(ListEmployes.SelectedItem as Employe);
+                window.Owner = this;
+                window.ShowDialog( );
+            }
+        }
+
+        private void TbPosition_TextChanged (object sender, TextChangedEventArgs e)
+        {
+            
+            
+        }
+
+        private void TbMinSalary_TextChanged (object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\st310-05\Desktop\Konkov_prakt7\obj\Debug\net8.0-windows\
+C:\Users\st310-05\Desktop\prakt7_trpo_4\obj\Debug\net8.0-windows\
 Konkov_prakt7
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\st310-05\Desktop\Konkov_prakt7\App.xaml
-11407045341
+C:\Users\st310-05\Desktop\prakt7_trpo_4\App.xaml
+21977462886
 221218701844
-6-906920563
+7-646972897
 2011382505182
-MainWindow.xaml;
+MainWindow.xaml;Winds\AddWindow.xaml;
 
 False
 

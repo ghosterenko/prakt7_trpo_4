@@ -1,0 +1,27 @@
+﻿<Window x:Class="Konkov_prakt7.Winds.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Konkov_prakt7.Winds"
+        mc:Ignorable="d"
+        Title="Добавление сотрудника" Height="450" Width="800">
+    <StackPanel x:Name="stpanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="ФИО"  Margin="0 10 0 0"/>
+        <TextBox Text="{Binding FullName, Mode=TwoWay}"/>
+
+        <TextBlock Text="Позиция"  Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Position, Mode=TwoWay}"/>
+
+        <TextBlock Text="Зарплата"  Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Salary, Mode=TwoWay}"/>
+
+        <TextBlock Text="Дата найма"  Margin="0 10 0 0"/>
+        <DatePicker Text="{Binding HireDate, Mode=TwoWay}"/>
+
+        <TextBlock Text="Активность, невыбранно - не активен"  Margin="0 10 0 0"/>
+        <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay}" Content="Активный"/>
+
+        <Button x:Name="AddEditbtn" Content="Создать" Click="AddEditbtn_Click" Margin="0 10 0 0"/>
+    </StackPanel>
+</Window>

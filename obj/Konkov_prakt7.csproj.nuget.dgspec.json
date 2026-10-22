@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\st310-05\\Desktop\\Konkov_prakt7\\Konkov_prakt7.csproj": {}
+    "C:\\Users\\st310-05\\Desktop\\prakt7_trpo_4\\Konkov_prakt7.csproj": {}
   },
   "projects": {
-    "C:\\Users\\st310-05\\Desktop\\Konkov_prakt7\\Konkov_prakt7.csproj": {
+    "C:\\Users\\st310-05\\Desktop\\prakt7_trpo_4\\Konkov_prakt7.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\st310-05\\Desktop\\Konkov_prakt7\\Konkov_prakt7.csproj",
+        "projectUniqueName": "C:\\Users\\st310-05\\Desktop\\prakt7_trpo_4\\Konkov_prakt7.csproj",
         "projectName": "Konkov_prakt7",
-        "projectPath": "C:\\Users\\st310-05\\Desktop\\Konkov_prakt7\\Konkov_prakt7.csproj",
+        "projectPath": "C:\\Users\\st310-05\\Desktop\\prakt7_trpo_4\\Konkov_prakt7.csproj",
         "packagesPath": "C:\\Users\\st310-05\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\st310-05\\Desktop\\Konkov_prakt7\\obj\\",
+        "outputPath": "C:\\Users\\st310-05\\Desktop\\prakt7_trpo_4\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
