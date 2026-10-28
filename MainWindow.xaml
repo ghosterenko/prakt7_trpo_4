@@ -62,9 +62,6 @@
             <TextBlock Text="Минимальная зарплата"/>
             <TextBox x:Name="TbMinSalary" Width="250" HorizontalAlignment="Left" TextChanged="TbMinSalary_TextChanged" Text="0"/>
 
-            <TextBlock Text="Номер человека"/>
-            <TextBox Width="250" HorizontalAlignment="Left"/>
-
             <Button x:Name="AddBtn" Width="250"  Content="Добавить запись" Click="AddBtn_Click" HorizontalAlignment="Left" Margin="0 10 0 0"/>
             <Button x:Name="EditBtn" Width="250"  Content="Изменить запись" Click="EditBtn_Click" HorizontalAlignment="Left" Margin="0 10 0 0"/>
             <Button x:Name="DeleteBtn" Width="250" Content="Удалить запись" Click="DeleteBtn_Click" HorizontalAlignment="Left" Margin="0 10 0 0"/>

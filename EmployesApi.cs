@@ -27,26 +27,18 @@ namespace Konkov_prakt7
             return responseList.ToList();
         }
 
-        public async Task<List<Employe>> GetEmployesFilterPositionAsync(string pos)
+        public async Task<List<Employe>> GetEmployesFilterAsync(string? pos, decimal? minSalary)
         {
-            var responseList = await _client.GetFromJsonAsync<List<Employe>>($"api/v1/Employees?pos={pos.ToLower()}");
-            if (responseList == null)
-            {
-                return null!;
-            }
-            return responseList.ToList( );
+            var employees = new List<string>();
 
-        }
+            if (!string.IsNullOrWhiteSpace(pos))
+                employees.Add($"pos={Uri.EscapeDataString(pos)}");
 
-        public async Task<List<Employe>> GetEmployesFilterMinSalaryAsync (decimal minSal = 0)
-        {
-            var responseList = await _client.GetFromJsonAsync<List<Employe>>($"api/v1/Employees?minSalary={minSal}");
-            if (responseList == null)
-            {
-                return null!;
-            }
-            return responseList.ToList( );
+            if (minSalary.HasValue && minSalary.Value > 0)
+                employees.Add($"minSalary={minSalary.Value.ToString()}");
 
+            var list = await _client.GetFromJsonAsync<List<Employe>>("api/v1/Employees" + (employees.Count > 0 ? "?" + string.Join("&", employees) : ""));
+            return list != null ? list : new List<Employe>();
         }
 
 
@@ -72,11 +64,11 @@ namespace Konkov_prakt7
             return false;
 
         }
-        public async Task<bool> PatchEmployesAsync(int id, Employe employe)
+        public async Task<bool> PatchEmployesAsync(int id, EmployeeDto employeDto)
         {
             response = await _client.PatchAsJsonAsync(
                 $"api/v1/Employees/{id}",
-                employe
+                employeDto
             );
             if (response.IsSuccessStatusCode)
                 return true;

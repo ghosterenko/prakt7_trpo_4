@@ -13,15 +13,16 @@ using System.Windows.Shapes;
 
 namespace Konkov_prakt7
 {
-    public partial class MainWindow :Window
+    public partial class MainWindow : Window
     {
-        static EmployesApi api = new( );
+        static EmployesApi api = new();
         public ObservableCollection<Employe> employes { get; set; } = new ObservableCollection<Employe>();
-        public List<Employe> AllEmploes = new( );
-        public MainWindow ()
+        public List<Employe> AllEmploes = new();
+
+        public MainWindow()
         {
-            InitializeComponent( );
-            LoadData( );
+            InitializeComponent();
+            LoadData();
         }
 
         private async Task LoadData()
@@ -30,9 +31,9 @@ namespace Konkov_prakt7
             {
                 AllEmploes = await api.GetEmployesAsync();
                 ListEmployes.ItemsSource = employes;
-                ApplyFilters( );
+                ApplyFilters();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -40,43 +41,56 @@ namespace Konkov_prakt7
 
         private void ApplyFilters()
         {
-            if (AllEmploes != null)
+            employes.Clear();
+            if (AllEmploes == null) return;
+
+            string pos = TbPosition.Text?.Trim() ?? "";
+            if (!decimal.TryParse(TbMinSalary.Text, out decimal minSal))
             {
-                foreach (var item in AllEmploes)
+                return;
+            }
+
+            foreach (var item in AllEmploes)
+            {
+                if (item.IsActive == true)
+                    item.IsActiveStr = "Действующий сотрудник";
+                else item.IsActiveStr = "Не активынй сотрудник";
+
+                if ((string.IsNullOrEmpty(pos) || item.Position.ToLower().Contains(pos.ToLower())) && (minSal <= 0 || item.Salary >= minSal))
                 {
-                    if (item.IsActive == true)
-                        item.IsActiveStr = "Действующий сотрудник";
-                    else item.IsActiveStr = "Не активынй сотрудник";
                     employes.Add(item);
                 }
             }
         }
 
-        private void DeleteBtn_Click (object sender, RoutedEventArgs e)
+        private async void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(ListEmployes.SelectedValue == null)
+            if (ListEmployes.SelectedValue == null)
             {
                 MessageBox.Show("Объект не выбран");
-            } 
+            }
             else
             {
                 MessageBoxResult res = MessageBox.Show("Вы точно хотите удалить выбранную запись?", "Удаление", MessageBoxButton.YesNo);
+
                 if (res == MessageBoxResult.Yes)
                 {
-                    return;
+                    Employe? temp = ListEmployes.SelectedValue as Employe;
+                    await api.DeleteEmployesAsync(temp.Id);
+                    MessageBox.Show("Удалено");
+                    LoadData();
                 }
             }
-            
         }
 
-        private void AddBtn_Click (object sender, RoutedEventArgs e)
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddWindow(null);
             window.Owner = this;
-            window.ShowDialog( );
+            window.ShowDialog();
         }
 
-        private void EditBtn_Click (object sender, RoutedEventArgs e)
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
             if (ListEmployes.SelectedValue == null)
             {
@@ -86,19 +100,19 @@ namespace Konkov_prakt7
             {
                 var window = new AddWindow(ListEmployes.SelectedItem as Employe);
                 window.Owner = this;
-                window.ShowDialog( );
+                window.ShowDialog();
             }
         }
 
-        private void TbPosition_TextChanged (object sender, TextChangedEventArgs e)
+        private void TbPosition_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-            
+            ApplyFilters();
         }
 
-        private void TbMinSalary_TextChanged (object sender, TextChangedEventArgs e)
+        private void TbMinSalary_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            ApplyFilters();
         }
+
     }
 }
